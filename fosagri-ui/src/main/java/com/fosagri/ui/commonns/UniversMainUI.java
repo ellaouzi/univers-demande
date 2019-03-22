@@ -1,12 +1,10 @@
 package com.fosagri.ui.commonns;
 
-import com.fosagri.ui.prestation.PrestationLayoutFactory;
+import com.fosagri.ui.demande.DemandeLayoutFactory;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-
 import com.fosagri.navigator.UniverseNavigator;
-import com.fosagri.ui.students.StudentLayoutFactory;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -85,7 +83,7 @@ public class UniversMainUI extends UI {
 		UniverseNavigator navigator = new UniverseNavigator(this, changeTab);
 		applicationContext.getAutowireCapableBeanFactory().autowireBean(navigator);
 		navigator.addProvider(viewProvider);
-		navigator.navigateTo(PrestationLayoutFactory.NAME);
+		navigator.navigateTo(DemandeLayoutFactory.NAME);
 		
 	}
 

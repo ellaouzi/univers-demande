@@ -1,8 +1,6 @@
 package com.fosagri.ui.adherent;
 
 import com.fosagri.ui.commonns.UniversMainUI;
-import com.fosagri.ui.students.AddStudentMainLayoutFactory;
-import com.fosagri.ui.students.ShowAllStudentsLayoutFactory;
 import com.fosagri.utils.StudentStringUitls;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -30,24 +28,12 @@ public class AdherentLayoutFactory extends VerticalLayout implements View, Adher
 		setMargin(true);
 		tabSheet = new TabSheet();
 		tabSheet.setWidth("100%");
-
-
-
-
-
 		addComponent(tabSheet);
-
 		Component addAdherentTab = addAdherentLayoutFactory.createComponent(this);
 	    Component showAllAdherentsTab = showAdherentsLayoutFactory.createComponent();
-		//ME Component showStatistic = statisticAdherentLayoutFactory.createComponent();
-		
 		tabSheet.addTab(addAdherentTab, "ADD ADHERENT");
 	    tabSheet.addTab(showAllAdherentsTab, "Show All ADHERENTS");
-		//ME tabSheet.addTab(showStatistic, "StatISTICS");
-		
 		addComponent(tabSheet);
-	
-		
 	}
 	
 	public void adherentSaved() {

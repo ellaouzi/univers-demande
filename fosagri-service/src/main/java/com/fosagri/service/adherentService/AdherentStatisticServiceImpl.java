@@ -1,9 +1,7 @@
 package com.fosagri.service.adherentService;
 
 import com.fosagri.repository.adherent.AdherentRepository;
-import com.fosagri.repository.university.UniversityRepository;
-import com.fosagri.service.universityStatisticService.UniversityStatisticService;
-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

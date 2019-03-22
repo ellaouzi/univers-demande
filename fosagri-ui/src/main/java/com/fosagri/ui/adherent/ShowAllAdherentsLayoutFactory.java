@@ -30,14 +30,11 @@ public class ShowAllAdherentsLayoutFactory implements UIComponentBuilder{
 
 		public ShowAllAdherentsLayout init() {
 			setMargin(true);
-
 			container = new BeanItemContainer<Adherent>(Adherent.class, adherents);
 			adherentsTable = new Grid(container);
 			adherentsTable.setColumnOrder("nom", "prenom","ppr", "age", "gender");
 			adherentsTable.removeColumn("id");
  			adherentsTable.setImmediate(true);
-
-
 			return this;
 		}
 

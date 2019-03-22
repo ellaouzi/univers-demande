@@ -9,7 +9,7 @@ public enum StringUtils {
 	MENU_ADD_STUDENT("Add Student"),
 	MENU_ADD_ADHERENT("Add Adherent"),
 	MENU_OPP_ADHERENT("Operations Adherents"),
-	MENU_OPP_PRESTATION("Operations Prestations"),
+	MENU_OPP_PRESTATION("Operations Demandes"),
 
 	MENU_REMOVE_STUDENT("Remove Student"),
 	MENU_CREATIONS("Operations");

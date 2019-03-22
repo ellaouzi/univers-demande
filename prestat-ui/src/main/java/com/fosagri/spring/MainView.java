@@ -1,7 +1,7 @@
 package com.fosagri.spring;
 
-import com.fosagri.model.entity.Prestation;
-import com.fosagri.repository.prestation.PrestationRepository;
+import com.fosagri.model.entity.Demande;
+import com.fosagri.repository.demande.DemandeRepository;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 
@@ -26,12 +26,11 @@ import java.util.List;
 
  class MainView extends UI {
 @Autowired
-PrestationRepository prestationRepository;
-    private Prestation prestation;
+DemandeRepository demandeRepository;
+    private Demande demande;
 
     public static final String NAME="/prestat";
     private Grid grid = new Grid();
-   // Crud<Prestation> crud = new Crud<>(Prestation.class, new PrestationCrudEditor());
 
     private TextField firstName = new TextField("First name");
     private TextField lastName = new TextField("Last name");
@@ -43,18 +42,14 @@ PrestationRepository prestationRepository;
     @Override
     protected void init(VaadinRequest request) {
 
-      //  GridCrud<Prestation> crud = new GridCrud<>(User.class);
 
 
 
 
         updateGrid();
-        //grid.addColumn("ppr");
-        //grid.addColumn("nom");
-        final BeanItemContainer<Prestation> ds =
-                new BeanItemContainer<Prestation>(Prestation.class, prestationRepository.findAll());
-       // Grid grid = new Grid("Employees", ds);
-         Grid grid = new Grid();
+         final BeanItemContainer<Demande> ds =
+                new BeanItemContainer<Demande>(Demande.class, demandeRepository.findAll());
+          Grid grid = new Grid();
 
          grid.addColumn("Nom", String.class);
         grid.addColumn("Coix1", String.class);
@@ -63,11 +58,11 @@ PrestationRepository prestationRepository;
 
             grid.getContainerDataSource().removeAllItems();
 
-            List<Prestation> prestations = prestationRepository.findAll();
+            List<Demande> demandes = demandeRepository.findAll();
 
-            for (Prestation prestation : prestations) {
+            for (Demande demande : demandes) {
 
-                grid.addRow(prestation.getNom(), prestation.getChoix1());
+                grid.addRow(demande.getNom(), demande.getChoix1());
             }
         });
         Button clearButton = new Button("Clear data");
@@ -88,9 +83,9 @@ PrestationRepository prestationRepository;
     }
 
     private void updateGrid() {
-        List prestations = prestationRepository.findAll();
-        grid.setContainerDataSource(new BeanItemContainer<>(Prestation.class,
-                prestations));
+        List demandes = demandeRepository.findAll();
+        grid.setContainerDataSource(new BeanItemContainer<>(Demande.class,
+                demandes));
         setFormVisible(false);
     }
 
@@ -100,8 +95,8 @@ PrestationRepository prestationRepository;
         if (grid.getSelectedRows().isEmpty()) {
             setFormVisible(false);
         } else {
-            prestation = (Prestation) grid.getSelectedRow();
-            BeanFieldGroup.bindFieldsUnbuffered(prestation, this);
+            demande = (Demande) grid.getSelectedRow();
+            BeanFieldGroup.bindFieldsUnbuffered(demande, this);
             setFormVisible(true);
         }
     }
@@ -113,7 +108,7 @@ PrestationRepository prestationRepository;
     }
 
     private void saveCustomer() {
-        prestationRepository.save(prestation);
+        demandeRepository.save(demande);
         updateGrid();
     }
 

@@ -2,9 +2,9 @@ package com.fosagri.rest;
 
 
 
-import com.fosagri.model.entity.Prestation;
-import com.fosagri.repository.prestation.PrestationRepository;
-import com.fosagri.service.prestation.PrestationService;
+import com.fosagri.model.entity.Demande;
+import com.fosagri.repository.demande.DemandeRepository;
+import com.fosagri.service.demande.DemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,121 +26,111 @@ import java.util.List;
 public class DemandeApi {
 
     @Autowired
-    PrestationService prestationService;  //Service which will do all data retrieval/manipulation work
+    DemandeService demandeService;  //Service which will do all data retrieval/manipulation work
 
 
 
-//-------------------Retrieve All Prestations--------------------------------------------------------
+//-------------------Retrieve All Demandes--------------------------------------------------------
 
-    @RequestMapping(value = "/prestation/", method = RequestMethod.GET)
-    public ResponseEntity<List<Prestation>> listAllPrestations() {
-        List<Prestation> Prestations = prestationService.findAllPrestations();
-        if(Prestations.isEmpty()){
-            return new ResponseEntity<List<Prestation>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+    @RequestMapping(value = "/demande/", method = RequestMethod.GET)
+    public ResponseEntity<List<Demande>> listAllDemandes() {
+        List<Demande> Demandes = demandeService.findAllDemandes();
+        if(Demandes.isEmpty()){
+            return new ResponseEntity<List<Demande>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<List<Prestation>>(Prestations, HttpStatus.OK);
+        return new ResponseEntity<List<Demande>>(Demandes, HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/prestation/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/demande/test", method = RequestMethod.GET)
     public  void test() {
         System.out.println("ca marche ======================================================");
 
     }
 
 
-    //-------------------Retrieve Single Prestation--------------------------------------------------------
+    //-------------------Retrieve Single Demande--------------------------------------------------------
 
-    @RequestMapping(value = "/prestation/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Prestation> getPrestation(@PathVariable("id") long id) {
-         Prestation Prestation = prestationService.findById(id);
-        if (Prestation == null) {
-             return new ResponseEntity<Prestation>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/demande/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Demande> getDemande(@PathVariable("id") long id) {
+         Demande Demande = demandeService.findById(id);
+        if (Demande == null) {
+             return new ResponseEntity<Demande>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Prestation>(Prestation, HttpStatus.OK);
+        return new ResponseEntity<Demande>(Demande, HttpStatus.OK);
     }
 
+    //-------------------Create a Demande--------------------------------------------------------
 
+    @RequestMapping(value = "/demande/", method = RequestMethod.POST)
+    public ResponseEntity<Void> createDemande(@RequestBody Demande demande,    UriComponentsBuilder ucBuilder) {
 
-    //-------------------Create a Prestation--------------------------------------------------------
-
-    @RequestMapping(value = "/prestation/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createPrestation(@RequestBody Prestation prestation,    UriComponentsBuilder ucBuilder) {
-
-        if (prestationService.isPrestationExist(prestation)) {
-            System.out.println("A Prestation with name " + prestation.getId() + " already exist");
+        if (demandeService.isDemandeExist(demande)) {
+            System.out.println("A Demande with name " + demande.getId() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         else {
-            prestation.setStatut("Nouvelle demande");
-            prestation.setDateprestation(new Date());
+            demande.setStatut("Nouvelle demande");
+            demande.setDatedemande(new Date());
         }
-
-        prestationService.savePrestation(prestation);
-
+        demandeService.saveDemande(demande);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/prestation/{id}").buildAndExpand(prestation.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/demande/{id}").buildAndExpand(demande.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
 
 
-    //------------------- Update a Prestation --------------------------------------------------------
+    //------------------- Update a Demande --------------------------------------------------------
 
-    @RequestMapping(value = "/prestation/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Prestation> updatePrestation(@PathVariable("id") long id, @RequestBody Prestation prestation) {
-        System.out.println("Updating Prestation " + id);
-
-        Prestation currentPrestation = prestationService.findById(id);
-
-        if (currentPrestation==null) {
-            System.out.println("Prestation with id " + id + " not found");
-            return new ResponseEntity<Prestation>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/demande/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Demande> updateDemande(@PathVariable("id") long id, @RequestBody Demande demande) {
+        System.out.println("Updating Demande " + id);
+        Demande currentDemande = demandeService.findById(id);
+        if (currentDemande==null) {
+            System.out.println("Demande with id " + id + " not found");
+            return new ResponseEntity<Demande>(HttpStatus.NOT_FOUND);
         }
-
-        currentPrestation.setTitre(prestation.getTitre());
-        currentPrestation.setType(prestation.getType());
-        currentPrestation.setStatut(prestation.getStatut());
-        currentPrestation.setCodAg(prestation.getCodAg());
-        currentPrestation.setChoix1(prestation.getChoix1());
-        currentPrestation.setChoix2(prestation.getChoix2());
-        currentPrestation.setPeriode1(prestation.getPeriode1());
-        currentPrestation.setPeriode2(prestation.getPeriode2());
-        currentPrestation.setPprconj(prestation.getPprconj());
-        currentPrestation.setEmail(prestation.getEmail());
-        //currentPrestation.setDateprestation(new Date());
-        currentPrestation.setGsm(prestation.getGsm());
-        prestationService.updatePrestation(currentPrestation);
-        return new ResponseEntity<Prestation>(currentPrestation, HttpStatus.OK);
+        currentDemande.setTitre(demande.getTitre());
+        currentDemande.setType(demande.getType());
+        currentDemande.setStatut(demande.getStatut());
+        currentDemande.setCodAg(demande.getCodAg());
+        currentDemande.setChoix1(demande.getChoix1());
+        currentDemande.setChoix2(demande.getChoix2());
+        currentDemande.setPeriode1(demande.getPeriode1());
+        currentDemande.setPeriode2(demande.getPeriode2());
+        currentDemande.setPprconj(demande.getPprconj());
+        currentDemande.setEmail(demande.getEmail());
+        currentDemande.setGsm(demande.getGsm());
+        demandeService.updateDemande(currentDemande);
+        return new ResponseEntity<Demande>(currentDemande, HttpStatus.OK);
     }
 
 
 
-    //------------------- Delete a Prestation --------------------------------------------------------
+    //------------------- Delete a Demande --------------------------------------------------------
 
-    @RequestMapping(value = "/prestation/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Prestation> deletePrestation(@PathVariable("id") long id) {
-        System.out.println("Fetching & Deleting Prestation with id " + id);
-
-        Prestation Prestation = prestationService.findById(id);
-        if (Prestation == null) {
-             return new ResponseEntity<Prestation>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/demande/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Demande> deleteDemande(@PathVariable("id") long id) {
+        System.out.println("Fetching & Deleting Demande with id " + id);
+        Demande Demande = demandeService.findById(id);
+        if (Demande == null) {
+             return new ResponseEntity<Demande>(HttpStatus.NOT_FOUND);
         }
 
-        prestationService.deletePrestationById(id);
-        return new ResponseEntity<Prestation>(HttpStatus.NO_CONTENT);
+        demandeService.deleteDemandeById(id);
+        return new ResponseEntity<Demande>(HttpStatus.NO_CONTENT);
     }
 
 
 
-    //------------------- Delete All Prestations --------------------------------------------------------
+    //------------------- Delete All Demandes --------------------------------------------------------
 
-    @RequestMapping(value = "/prestation/", method = RequestMethod.DELETE)
-    public ResponseEntity<Prestation> deleteAllPrestations() {
-        System.out.println("Deleting All Prestations");
-
-        prestationService.deleteAllPrestations();
-        return new ResponseEntity<Prestation>(HttpStatus.NO_CONTENT);
+    @RequestMapping(value = "/demande/", method = RequestMethod.DELETE)
+    public ResponseEntity<Demande> deleteAllDemandes() {
+        System.out.println("Deleting All Demandes");
+        demandeService.deleteAllDemandes();
+        return new ResponseEntity<Demande>(HttpStatus.NO_CONTENT);
     }
 
 }

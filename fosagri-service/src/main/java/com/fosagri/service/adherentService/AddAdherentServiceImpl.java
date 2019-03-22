@@ -19,7 +19,6 @@ public class AddAdherentServiceImpl implements AddAdherentService  {
 		adherent.setAge(adherentDAO.getAge());
 		adherent.setPosition(adherentDAO.getPosition());
 		adherent.setGender(adherentDAO.getGender());
-System.out.println(adherent);
 		adherentRepository.save(adherent);
 	}
 	
