@@ -22,4 +22,4 @@
 *.rar
 
 #Intellij
-*.iml
+#*.iml
