@@ -30,11 +30,6 @@ public class Demande {
 	private String gsm;
 	private int nombre;
 
-	//===============================Relation conjoint adherent: Many conj to One Adherent==================
-	@ManyToOne
-	@JoinColumn(name = "adherentId")
-	Adherent adherent;
-//===========================================================
 
 
 
