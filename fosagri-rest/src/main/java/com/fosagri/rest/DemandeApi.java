@@ -33,7 +33,7 @@ public class DemandeApi {
 //-------------------Retrieve All Demandes--------------------------------------------------------
 
     @RequestMapping(value = "/demande/", method = RequestMethod.GET)
-    public ResponseEntity<List<Demande>> listAllDemandes() {
+    public ResponseEntity<List<Demande>> listByDemandes() {
         List<Demande> Demandes = demandeService.findAllDemandes();
         if(Demandes.isEmpty()){
             return new ResponseEntity<List<Demande>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
@@ -41,13 +41,14 @@ public class DemandeApi {
         return new ResponseEntity<List<Demande>>(Demandes, HttpStatus.OK);
     }
 
-
-    @RequestMapping(value = "/demande/test", method = RequestMethod.GET)
-    public  void test() {
-        System.out.println("ca marche ======================================================");
-
+    @RequestMapping(value = "/demande/{prestation}", method = RequestMethod.GET)
+    public ResponseEntity<List<Demande>> listDemandesByPresationRefId(@PathVariable("prestation") Long prestation) {
+        List<Demande> Demandes = demandeService.findByPrestationId(prestation);
+        if(Demandes.isEmpty()){
+            return new ResponseEntity<List<Demande>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Demande>>(Demandes, HttpStatus.OK);
     }
-
 
     //-------------------Retrieve Single Demande--------------------------------------------------------
 

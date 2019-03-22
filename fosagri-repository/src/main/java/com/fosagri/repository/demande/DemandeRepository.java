@@ -14,6 +14,8 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
 	@Query("select p from Demande p order by p.titre")
 	List<Demande> getAllDemandes();
 	
+	List<Demande> findByPrestationId(Long prestationId);
+	
 	@Query("select count(p) from Demande p where p.id =:id")
 	Integer getNumOfAdherentForDemandes(@Param("id") Long id);
 

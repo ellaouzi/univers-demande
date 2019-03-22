@@ -12,10 +12,11 @@ public class Demande {
 	@Id
 	@GeneratedValue
 	private Long id;
+	private Long prestationId;
 	private String nom;
 	private String titre;
-	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-	private Date datedemande;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date dateprestation;
 	private String statut;
 	private String type;
 	private String destination;
@@ -26,12 +27,20 @@ public class Demande {
 	private String benificiare;
 	private String codAg;
 	private String email;
-	private String pprconj;
 	private String gsm;
+	private String passport;
+	private String dateExpPassport;
+	private String text1;
+	private Date date1;
+	private String text2;
+	private Date date2;
+	private String text3;
+	private Date date3;
+	private String text4;
+	private Date date4;
 	private int nombre;
-
-
-
+	private Date datedemande;   
+	private String pprconj;
 
 	public Demande() {
 	}
