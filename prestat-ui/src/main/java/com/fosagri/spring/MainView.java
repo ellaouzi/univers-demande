@@ -51,8 +51,8 @@ DemandeRepository demandeRepository;
                 new BeanItemContainer<Demande>(Demande.class, demandeRepository.findAll());
           Grid grid = new Grid();
 
-         grid.addColumn("Nom", String.class);
-        grid.addColumn("Coix1", String.class);
+         grid.addColumn("Choix1", String.class);
+        grid.addColumn("Choix2", String.class);
         Button loadButton = new Button("Load data");
         loadButton.addClickListener(e -> {
 
@@ -62,7 +62,7 @@ DemandeRepository demandeRepository;
 
             for (Demande demande : demandes) {
 
-                grid.addRow(demande.getNom(), demande.getChoix1());
+                grid.addRow(demande.getChoix1(), demande.getChoix2());
             }
         });
         Button clearButton = new Button("Clear data");

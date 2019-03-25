@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({"com.fosagri"})
 @EnableJpaRepositories({"com.fosagri"})
 @EntityScan(("com.fosagri"))
+
 public class SpringBootApplication extends SpringBootServletInitializer{
 	
 	@Override

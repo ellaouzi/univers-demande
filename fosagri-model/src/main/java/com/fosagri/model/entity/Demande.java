@@ -12,14 +12,8 @@ public class Demande {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Long prestationId;
-	private String nom;
-	private String titre;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private Date dateprestation;
 	private String statut;
-	private String type;
-	private String destination;
+ 	private String destination;
 	private String choix1;
 	private String choix2;
 	private String periode1;
@@ -39,22 +33,41 @@ public class Demande {
 	private String text4;
 	private Date date4;
 	private int nombre;
-	private Date datedemande;   
+	private Date datedemande;
 	private String pprconj;
 
-	public Demande() {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="prestation_id")
+    Prestation prestation;
+
+ 	public Demande() {
+	    super();
 	}
 
-	public Demande(String nom, String titre, Date datedemande, String statut, String type, String destination, String benificiare, String codAg, int nombre) {
-		this.nom = nom;
-		this.titre = titre;
-		this.datedemande = datedemande;
-		this.statut = statut;
-		this.type = type;
-		this.destination = destination;
-		this.benificiare = benificiare;
-		this.codAg = codAg;
-		this.nombre = nombre;
-	}
 
+    public Demande(String statut, String destination, String choix1, String choix2, String periode1, String periode2, String benificiare, String codAg, String email, String gsm, String passport, String dateExpPassport, String text1, Date date1, String text2, Date date2, String text3, Date date3, String text4, Date date4, int nombre, Date datedemande, String pprconj) {
+        this.statut = statut;
+        this.destination = destination;
+        this.choix1 = choix1;
+        this.choix2 = choix2;
+        this.periode1 = periode1;
+        this.periode2 = periode2;
+        this.benificiare = benificiare;
+        this.codAg = codAg;
+        this.email = email;
+        this.gsm = gsm;
+        this.passport = passport;
+        this.dateExpPassport = dateExpPassport;
+        this.text1 = text1;
+        this.date1 = date1;
+        this.text2 = text2;
+        this.date2 = date2;
+        this.text3 = text3;
+        this.date3 = date3;
+        this.text4 = text4;
+        this.date4 = date4;
+        this.nombre = nombre;
+        this.datedemande = datedemande;
+        this.pprconj = pprconj;
+    }
 }

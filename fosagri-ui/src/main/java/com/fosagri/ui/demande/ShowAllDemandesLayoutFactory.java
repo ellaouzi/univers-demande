@@ -36,10 +36,7 @@ public class ShowAllDemandesLayoutFactory implements UIComponentBuilder{
 			adherentsTable.setColumnOrder("codAg", "nombre","choix1","choix2", "periode1","periode2","gsm","email","statut");
 			adherentsTable.removeColumn("id");
  			adherentsTable.removeColumn("destination");
- 			adherentsTable.removeColumn("titre");
-			adherentsTable.removeColumn("nom");
-			adherentsTable.removeColumn("type");
-			adherentsTable.removeColumn("benificiare");
+ 			adherentsTable.removeColumn("benificiare");
  			adherentsTable.setImmediate(true);
  			adherentsTable.setWidth("100%");
 			return this;

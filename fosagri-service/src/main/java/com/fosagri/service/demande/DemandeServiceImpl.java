@@ -48,11 +48,7 @@ public class DemandeServiceImpl implements DemandeService {
     }
 
     public Demande findByName(String name) {
-        for (Demande demande : demandes) {
-            if (demande.getTitre().equalsIgnoreCase(name)) {
-                return demande;
-            }
-        }
+
         return null;
     }
 
@@ -71,7 +67,7 @@ public class DemandeServiceImpl implements DemandeService {
     }
 
     public boolean isDemandeExist(Demande demande) {
-        return findByName(demande.getTitre()) != null;
+        return  true;
     }
 
     public void deleteAllDemandes() {
