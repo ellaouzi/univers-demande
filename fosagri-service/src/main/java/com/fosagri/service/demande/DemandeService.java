@@ -11,7 +11,6 @@ public interface DemandeService {
 
     Demande findByName(String name);
 
-	List<Demande> findByPrestationId(Long prestationId);
 
     void saveDemande(Demande demande);
 

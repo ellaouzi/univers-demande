@@ -74,9 +74,5 @@ public class DemandeServiceImpl implements DemandeService {
         demandes.clear();
     }
 
-	public List<Demande> findByPrestationId(Long prestationId) {
-	return demandeRepository.findByPrestationId(prestationId);
-	}
-
 
 }
