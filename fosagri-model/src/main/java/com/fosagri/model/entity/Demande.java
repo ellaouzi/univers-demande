@@ -1,18 +1,18 @@
 package com.fosagri.model.entity;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
-public class Demande {
+public class Demande implements Serializable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String statut;
+ 	private String statut;
  	private String destination;
 	private String choix1;
 	private String choix2;
@@ -36,14 +36,13 @@ public class Demande {
 	private Date datedemande;
 	private String pprconj;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="prestation_id")
     Prestation prestation;
 
  	public Demande() {
 	    super();
 	}
-
 
     public Demande(String statut, String destination, String choix1, String choix2, String periode1, String periode2, String benificiare, String codAg, String email, String gsm, String passport, String dateExpPassport, String text1, Date date1, String text2, Date date2, String text3, Date date3, String text4, Date date4, int nombre, Date datedemande, String pprconj) {
         this.statut = statut;

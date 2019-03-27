@@ -4,37 +4,46 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
-public class Prestation {
+public class Prestation implements Serializable {
 	@Id
-	@GeneratedValue
-	private Long prestationId;
-	private String nom;
-	private String titre;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private Date dateprestation;
-	private String statut;
+	@Column(name = "prestation_id")
+	private Long id;
+  	private String statut;
 	private String type;
+ 	private String label;
+ 	private String valeurs;
+	private String description;
+	private boolean open;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date dateDu;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date dateAu;
+ 	private int nombreLimit;
 
-	@OneToMany(fetch = FetchType.LAZY,  mappedBy = "prestation")
-    private Set<Demande> demandes;
+  	@OneToMany(mappedBy = "prestation", fetch = FetchType.LAZY)
+     private List<Demande> demandes;
 
 	public Prestation() {
 		super();
 	}
 
-
-	public Prestation(String nom, String titre, Date dateprestation, String statut, String type, Set<Demande> demandes) {
-		this();
-		this.nom = nom;
-		this.titre = titre;
-		this.dateprestation = dateprestation;
-		this.statut = statut;
+	public Prestation(  String statut, String type, Long id, String label, String valeurs, String description, boolean open, Date dateDu, Date dateAu, int nombreLimit, List<Demande> demandes) {
+ 		this.statut = statut;
 		this.type = type;
-		this.demandes=demandes;
+		this.id = id;
+		this.label = label;
+		this.valeurs = valeurs;
+		this.description = description;
+		this.open = open;
+		this.dateDu = dateDu;
+		this.dateAu = dateAu;
+		this.nombreLimit = nombreLimit;
+		this.demandes = demandes;
 	}
 }
