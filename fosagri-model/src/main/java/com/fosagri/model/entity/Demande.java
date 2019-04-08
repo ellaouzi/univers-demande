@@ -35,6 +35,10 @@ public class Demande implements Serializable {
 	private int nombre;
 	private Date datedemande;
 	private String pprconj;
+	private String createdBy;
+	private Date creationDate;
+	private String modifiedBy;
+	private Date modificationDate;
 
     @ManyToOne
     @JoinColumn(name="prestation_id")
@@ -44,29 +48,34 @@ public class Demande implements Serializable {
 	    super();
 	}
 
-    public Demande(String statut, String destination, String choix1, String choix2, String periode1, String periode2, String benificiare, String codAg, String email, String gsm, String passport, String dateExpPassport, String text1, Date date1, String text2, Date date2, String text3, Date date3, String text4, Date date4, int nombre, Date datedemande, String pprconj) {
-        this.statut = statut;
-        this.destination = destination;
-        this.choix1 = choix1;
-        this.choix2 = choix2;
-        this.periode1 = periode1;
-        this.periode2 = periode2;
-        this.benificiare = benificiare;
-        this.codAg = codAg;
-        this.email = email;
-        this.gsm = gsm;
-        this.passport = passport;
-        this.dateExpPassport = dateExpPassport;
-        this.text1 = text1;
-        this.date1 = date1;
-        this.text2 = text2;
-        this.date2 = date2;
-        this.text3 = text3;
-        this.date3 = date3;
-        this.text4 = text4;
-        this.date4 = date4;
-        this.nombre = nombre;
-        this.datedemande = datedemande;
-        this.pprconj = pprconj;
-    }
+	public Demande(String statut, String destination, String choix1, String choix2, String periode1, String periode2, String benificiare, String codAg, String email, String gsm, String passport, String dateExpPassport, String text1, Date date1, String text2, Date date2, String text3, Date date3, String text4, Date date4, int nombre, Date datedemande, String pprconj, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, Prestation prestation) {
+		this.statut = statut;
+		this.destination = destination;
+		this.choix1 = choix1;
+		this.choix2 = choix2;
+		this.periode1 = periode1;
+		this.periode2 = periode2;
+		this.benificiare = benificiare;
+		this.codAg = codAg;
+		this.email = email;
+		this.gsm = gsm;
+		this.passport = passport;
+		this.dateExpPassport = dateExpPassport;
+		this.text1 = text1;
+		this.date1 = date1;
+		this.text2 = text2;
+		this.date2 = date2;
+		this.text3 = text3;
+		this.date3 = date3;
+		this.text4 = text4;
+		this.date4 = date4;
+		this.nombre = nombre;
+		this.datedemande = datedemande;
+		this.pprconj = pprconj;
+		this.createdBy = createdBy;
+		this.creationDate = creationDate;
+		this.modifiedBy = modifiedBy;
+		this.modificationDate = modificationDate;
+		this.prestation = prestation;
+	}
 }
